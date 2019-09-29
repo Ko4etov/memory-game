@@ -1,0 +1,12 @@
+.table {
+    margin-bottom: 25px;
+}
+.table-head-row_cell, .table-body-row_cell {
+    border: 1px solid #ccc;
+}
+.table-head-row_cell {
+    cursor: pointer;
+}
+.table-head-row_cell.active {
+    background-color:  #ccc;
+}

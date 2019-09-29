@@ -1,0 +1,16 @@
+.timer {
+    font-size: 35px;
+    font-family: sans-serif;
+}
+.timer--small {
+    font-size: 25px;
+}
+.button-timer {
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+.button-timer:hover {
+    cursor: pointer;
+}
