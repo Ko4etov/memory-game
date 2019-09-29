@@ -7,24 +7,24 @@ export default class Field extends Component {
         super(props)
         this.state = {
             cards: [
-                {id:1, name: 'dog', link: '../img/dog.jpg', isOpen: false, isFounded: false},
-                {id:2, name: 'crocodile', link: '../img/crocodile.jpg', isOpen: false, isFounded: false},
-                {id:3, name: 'giraffe', link: '../img/giraffe.jpg', isOpen: false, isFounded: false},
-                {id:4, name: 'horse', link: '../img/horse.jpg', isOpen: false, isFounded: false},
-                {id:5, name: 'lion', link: '../img/lion.jpg', isOpen: false, isFounded: false},
-                {id:6, name: 'rhino', link: '../img/rhino.jpg', isOpen: false, isFounded: false},
-                {id:7, name: 'snake', link: '../img/snake.jpg', isOpen: false, isFounded: false},
-                {id:8, name: 'turtle', link: '../img/turtle.jpg', isOpen: false, isFounded: false},
-                {id:9, name: 'wolf', link: '../img/wolf.jpg', isOpen: false, isFounded: false},
-                {id:10, name: 'cat', link: '../img/cat.jpg', isOpen: false, isFounded: false},
-                {id:11, name: 'deer', link: '../img/deer.jpg', isOpen: false, isFounded: false},
-                {id:12, name: 'elephant', link: '../img/elephant.jpg', isOpen: false, isFounded: false},
-                {id:13, name: 'frog', link: '../img/frog.jpg', isOpen: false, isFounded: false},
-                {id:14, name: 'hedgehog', link: '../img/hedgehog.jpg', isOpen: false, isFounded: false},
-                {id:15, name: 'pig', link: '../img/pig.jpg', isOpen: false, isFounded: false},
-                {id:16, name: 'puppy', link: '../img/puppy.jpg', isOpen: false, isFounded: false},
-                {id:17, name: 'snail', link: '../img/snail.jpg', isOpen: false, isFounded: false},
-                {id:18, name: 'toad', link: '../img/toad.jpg', isOpen: false, isFounded: false},
+                {id:1, name: 'dog', link: 'img/dog.jpg', isOpen: false, isFounded: false},
+                {id:2, name: 'crocodile', link: 'img/crocodile.jpg', isOpen: false, isFounded: false},
+                {id:3, name: 'giraffe', link: 'img/giraffe.jpg', isOpen: false, isFounded: false},
+                {id:4, name: 'horse', link: 'img/horse.jpg', isOpen: false, isFounded: false},
+                {id:5, name: 'lion', link: 'img/lion.jpg', isOpen: false, isFounded: false},
+                {id:6, name: 'rhino', link: 'img/rhino.jpg', isOpen: false, isFounded: false},
+                {id:7, name: 'snake', link: 'img/snake.jpg', isOpen: false, isFounded: false},
+                {id:8, name: 'turtle', link: 'img/turtle.jpg', isOpen: false, isFounded: false},
+                {id:9, name: 'wolf', link: 'img/wolf.jpg', isOpen: false, isFounded: false},
+                {id:10, name: 'cat', link: 'img/cat.jpg', isOpen: false, isFounded: false},
+                {id:11, name: 'deer', link: 'img/deer.jpg', isOpen: false, isFounded: false},
+                {id:12, name: 'elephant', link: 'img/elephant.jpg', isOpen: false, isFounded: false},
+                {id:13, name: 'frog', link: 'img/frog.jpg', isOpen: false, isFounded: false},
+                {id:14, name: 'hedgehog', link: 'img/hedgehog.jpg', isOpen: false, isFounded: false},
+                {id:15, name: 'pig', link: 'img/pig.jpg', isOpen: false, isFounded: false},
+                {id:16, name: 'puppy', link: 'img/puppy.jpg', isOpen: false, isFounded: false},
+                {id:17, name: 'snail', link: 'img/snail.jpg', isOpen: false, isFounded: false},
+                {id:18, name: 'toad', link: 'img/toad.jpg', isOpen: false, isFounded: false},
               ],
               arrayCardsCopy: [],
               prevCard: {},
@@ -61,7 +61,7 @@ export default class Field extends Component {
             })
         }, 1000);
     }
-
+    //проверяем закончил ли пользователь игру
     checkEndGame() {
         if (this.state.cards.find(item => item.isFounded === false) === undefined) {
             this.setState({
@@ -102,7 +102,7 @@ export default class Field extends Component {
 
     //Функция сравнения карточек
     compareCards(prevCard, currentCard) {
-        if (Object.keys(prevCard).length !== 0 && currentCard.index !== prevCard.index) {
+        if (Object.keys(prevCard).length !== 0) {
             if (prevCard.name === currentCard.name) {
                 this.state.arrayCardsCopy.map((element, index) => {
                     if(element.id == currentCard.index || element.id == prevCard.index) {
@@ -135,19 +135,24 @@ export default class Field extends Component {
         return {index, name, card}
     }
 
-    //Сохраняем карточку в стейт
+    //Сохраняем карточку в стейт и запускаем таймер
     saveCardInState(prevCard, cardInfo) {
         if (Object.keys(prevCard).length === 0) {
-            this.setState({
+            this.setState((prevState) => ({
                 prevCard: cardInfo,
-            })
+            }))
+            let timerCards = setTimeout(() => {
+                this.state.prevCard.card.classList.toggle('card--open')
+                this.setState({
+                    prevCard: {},
+                })
+            }, 5000);
         } else {
             this.setState({
                 secondCard: cardInfo,
             })
         }
     }
-
 
     //Обрабатываем клик по карточке
     openCardHandler(e) {
@@ -164,13 +169,13 @@ export default class Field extends Component {
         //Сравниваем карточки
         this.compareCards(this.state.prevCard, cardInfo);
     }
-
+    //Проверяем начал ли пользователь игру
     checkStartGame = (value) => {
         this.setState({ 
             checkStartGame: value,
         })
     }
-
+    //Получаем время окончания игры
     getEndTime = (time) => {
         this.setState({ 
             gameEndTime: time
