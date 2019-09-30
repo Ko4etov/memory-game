@@ -141,7 +141,7 @@ export default class Field extends Component {
             this.setState((prevState) => ({
                 prevCard: cardInfo,
             }))
-            let timerCards = setTimeout(() => {
+            this.timerCards = setTimeout(() => {
                 this.state.prevCard.card.classList.toggle('card--open')
                 this.setState({
                     prevCard: {},
@@ -150,7 +150,8 @@ export default class Field extends Component {
         } else {
             this.setState({
                 secondCard: cardInfo,
-            })
+            });
+            clearTimeout(this.timerCards);
         }
     }
 

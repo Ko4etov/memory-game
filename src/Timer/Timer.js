@@ -21,9 +21,9 @@ export default class Timer extends Component {
       })
     } 
 
-    timerTick(timer, timeStart, intervalID) {
+    timerTick(timer, timeStart, timerInterval) {
       if (this.props.checkEndGame === 1) {
-        clearInterval(this.timerInterval)
+        clearInterval(timerInterval)
         this.timeRef.disabled = false;
         let newTimer = Moment([0, 0], "mm:ss").format("mm:ss");
         this.setState({

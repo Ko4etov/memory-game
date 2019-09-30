@@ -45,8 +45,8 @@ class Table extends Component {
 
     componentDidMount() {
         if (sessionStorage.length !== 0) {
-            for (var i = 0; i < sessionStorage.length; i++) {
-                var key = sessionStorage.key(i);
+            for (let i = 0; i < sessionStorage.length; i++) {
+                let key = sessionStorage.key(i);
                 this.state.data.push(JSON.parse(sessionStorage[key]));
               }
         }
@@ -86,9 +86,9 @@ class Table extends Component {
             thClassName: 'table-head-row_cell'
         }
         const tableBodyRowClassNames = {
-            tbodyClassName: 'table-body',
-            trClassName: 'table-body-row',
-            tdClassName: 'table-body-row_cell'
+            tbodyClassName: ['table-body'],
+            trClassName: ['table-body-row'],
+            tdClassName: ['table-body-row_cell']
         }
         return(
             <React.Fragment>
